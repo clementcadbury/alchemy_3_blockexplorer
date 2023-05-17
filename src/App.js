@@ -1,5 +1,15 @@
 import { Alchemy, Network } from 'alchemy-sdk';
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route} from "react-router-dom";
+
+import Navbar from './Navbar';
+import Home from './Home';
+import Block from './Block';
+import Transaction from './Transaction';
+import ErrorPage from "./error-page";
 
 import './App.css';
 
@@ -11,7 +21,6 @@ const settings = {
   network: Network.ETH_MAINNET,
 };
 
-
 // In this week's lessons we used ethers.js. Here we are using the
 // Alchemy SDK is an umbrella library with several different packages.
 //
@@ -20,17 +29,23 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 function App() {
-  const [blockNumber, setBlockNumber] = useState();
 
-  useEffect(() => {
-    async function getBlockNumber() {
-      setBlockNumber(await alchemy.core.getBlockNumber());
-    }
+  return (
+    <Router>
+      <div className='App'>
+        <Navbar alchemy={alchemy} />
+        <div className='mt-5 mx-4' >
+          <Routes>
+            <Route path="/" element={<Home alchemy={alchemy} />} />
+            <Route path="block/:blockId?" element={<Block alchemy={alchemy}/>} />
+            <Route path="transaction/:transactionHash?" element={<Transaction alchemy={alchemy}/>} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
 
-    getBlockNumber();
-  });
-
-  return <div className="App">Block Number: {blockNumber}</div>;
+  );
 }
 
 export default App;
