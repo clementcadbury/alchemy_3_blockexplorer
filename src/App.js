@@ -35,7 +35,7 @@ function App() {
     <Router>
       <div className='App'>
         <Navbar alchemy={alchemy} />
-        <div className='mt-5 mx-4' >
+        <div className='mx-4' style={{marginTop:'5rem'}}>
           <Routes>
             <Route path="/" element={<Home alchemy={alchemy} />} />
             <Route path="block/:blockId?" element={<Block alchemy={alchemy}/>} />

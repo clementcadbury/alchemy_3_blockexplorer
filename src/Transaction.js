@@ -16,7 +16,7 @@ function Transaction({ alchemy }) {
             for (const line in response) {
                 //console.log(line);
                 if (typeof response[line] !== 'function' && response[line]) {
-                    console.log(line + " : " + typeof response[line]);
+                    //console.log(line + " : " + typeof response[line]);
                     if (typeof response[line] === 'object') {
                         if (response[line]._hex) {
                             properties[line] = response[line]._hex;

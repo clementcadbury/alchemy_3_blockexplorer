@@ -1,15 +1,40 @@
 import { Link } from "react-router-dom";
+import { useNavigate   } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import { Utils } from 'alchemy-sdk';
 import { useState } from 'react';
 
 function Navbar({ alchemy }) {
-    const [myOptions, setMyOptions] = useState([]);
+    const [formError,setFormError] = useState('');
 
-    const getDataFromAPI = () => {
-        const myOptions = ['1', '2', '3'];
-        setMyOptions(myOptions)
-    }
+    const navigate = useNavigate();
+
+    const searchSubmit = async (e) => {
+        e.preventDefault();
+        //console.log(e.target[0].value);
+        const searchStr = e.target[0].value;
+        if ( isValidAddress(searchStr) ){
+            navigate('/address/' + searchStr);
+            e.target[0].value = '';
+            setFormError('');
+        } else if ( isHash(searchStr) ) {
+            if ( await alchemy.core.getBlock(searchStr) ){
+                navigate('/block/' + searchStr);
+                e.target[0].value = '';
+                setFormError('');
+            } else if ( await alchemy.core.getTransaction(searchStr) ){
+                navigate('/transaction/' + searchStr);
+                e.target[0].value = '';
+                setFormError('');
+            }
+        } else if ( filterInt(searchStr) ) {
+            navigate('/block/' + searchStr);
+            e.target[0].value = '';
+            setFormError('');
+        } else {
+            setFormError('1');
+        }
+    };
 
     return (
         <nav className='navbar navbar-expand bg-light fixed-top shadow p-0' >
@@ -29,21 +54,15 @@ function Navbar({ alchemy }) {
                     </li>
                 </ul>
                 <div className="d-flex" role="search">
-                    <Autocomplete
-                        style={{ width: '300px', }}
-                        size="small"
-                        freeSolo
-                        autoComplete
-                        autoHighlight
-                        options={myOptions}
-                        renderInput={(params) => (
-                            <TextField {...params}
-                                onChange={getDataFromAPI}
-                                variant="outlined"
-                                label="Search"
-                            />
-                        )}
-                    />
+                    <form onSubmit={searchSubmit}>
+                        <TextField
+                            variant="outlined"
+                            label="Search"
+                            size="small"
+                            margin="dense"
+                            error={formError}
+                        />
+                    </form>
                 </div>
 
             </div>
@@ -52,3 +71,17 @@ function Navbar({ alchemy }) {
 }
 
 export default Navbar;
+
+function isValidAddress(a) {
+    return Utils.isHexString(a) && a.length === 42;
+}
+
+function isHash(a) {
+    return Utils.isHexString(a) && a.length === 66;
+}
+
+function filterInt(value) {
+    if (/^(-|\+)?(\d+|Infinity)$/.test(value))
+      return Number(value);
+    return null;
+  }
