@@ -47,9 +47,9 @@ function Transaction({ alchemy }) {
                 {Object.entries(_transactionData).map((entry) => {
                     let text = "";
                     if ( entry[0] === 'blockNumber' || entry[0] === 'blockHash' ){
-                        text = <Link to={`/block/${entry[1]}`} >{entry[1]}</Link>;
+                        text = <Link to={`${process.env.PUBLIC_URL}/block/${entry[1]}`} >{entry[1]}</Link>;
                     } else if ( entry[0] === 'from' || entry[0] === 'to' ){
-                        text = <Link to={`/address/${entry[1]}`} >{entry[1]}</Link>;
+                        text = <Link to={`${process.env.PUBLIC_URL}/address/${entry[1]}`} >{entry[1]}</Link>;
                     } else {
                         text = entry[1];
                     }

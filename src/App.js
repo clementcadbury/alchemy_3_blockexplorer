@@ -37,10 +37,10 @@ function App() {
         <Navbar alchemy={alchemy} />
         <div className='mx-4' style={{marginTop:'5rem'}}>
           <Routes>
-            <Route path="/" element={<Home alchemy={alchemy} />} />
-            <Route path="block/:blockId?" element={<Block alchemy={alchemy}/>} />
-            <Route path="transaction/:transactionHash?" element={<Transaction alchemy={alchemy}/>} />
-            <Route path="address/:address?" element={<Address alchemy={alchemy}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/`} element={<Home alchemy={alchemy} />} />
+            <Route path={`${process.env.PUBLIC_URL}/block/:blockId?`} element={<Block alchemy={alchemy}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/transaction/:transactionHash?`} element={<Transaction alchemy={alchemy}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/address/:address?`} element={<Address alchemy={alchemy}/>} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>

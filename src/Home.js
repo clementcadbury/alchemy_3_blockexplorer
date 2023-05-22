@@ -12,7 +12,7 @@ function Home({alchemy}) {
         getBlockNumber();
     });
 
-    return <div>Latest Block : <Link to={"block/"+blockNumber}>{blockNumber}</Link></div>;
+    return <div>Latest Block : <Link to={ process.env.PUBLIC_URL + "block/"+blockNumber}>{blockNumber}</Link></div>;
 }
 
 export default Home;

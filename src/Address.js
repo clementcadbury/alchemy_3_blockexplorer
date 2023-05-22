@@ -62,9 +62,9 @@ function Address({ alchemy }) {
                         } else {
                             text = entry[1];
                         }*/
-                        const category = entry.hash ? <Link to={`/transaction/${entry.hash}`} >{entry.category}</Link> : entry.category;
-                        const to = <Link to={`/address/${entry.to}`} >{entry.to}</Link>;
-                        const asset = entry.rawContract.address ? <Link to={`/address/${entry.rawContract.address}`} >{entry.asset}</Link> : entry.asset;
+                        const category = entry.hash ? <Link to={`${process.env.PUBLIC_URL}/transaction/${entry.hash}`} >{entry.category}</Link> : entry.category;
+                        const to = <Link to={`${process.env.PUBLIC_URL}/address/${entry.to}`} >{entry.to}</Link>;
+                        const asset = entry.rawContract.address ? <Link to={`${process.env.PUBLIC_URL}/address/${entry.rawContract.address}`} >{entry.asset}</Link> : entry.asset;
                         return <tr key={entry.uniqueId}><td>{category}</td><td>{to}</td><td>{entry.value} {asset}</td></tr>
                     })}
                 </tbody>

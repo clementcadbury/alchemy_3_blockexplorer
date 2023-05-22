@@ -43,9 +43,9 @@ function Block({ alchemy }) {
                     {Object.entries(_blockData).map((entry) => {
                         let text = "";
                         if ( entry[0] === 'hash' || entry[0] === 'parentHash' || entry[0] === 'number' ){
-                            text = <Link to={`/block/${entry[1]}`} >{entry[1]}</Link>;
+                            text = <Link to={`${process.env.PUBLIC_URL}/block/${entry[1]}`} >{entry[1]}</Link>;
                         } else if ( entry[0] === 'miner' ){
-                            text = <Link to={`/address/${entry[1]}`} >{entry[1]}</Link>;
+                            text = <Link to={`${process.env.PUBLIC_URL}/address/${entry[1]}`} >{entry[1]}</Link>;
                         } else {
                             text = entry[1];
                         }
@@ -70,7 +70,7 @@ function Block({ alchemy }) {
                     <table className='table table-bordered'>
                         <tbody>
                             {blockTransactions.map((entry) => {
-                                return <tr key={entry}><td><Link to={"/transaction/" + entry}>{entry}</Link></td></tr>
+                                return <tr key={entry}><td><Link to={ process.env.PUBLIC_URL + "/transaction/" + entry}>{entry}</Link></td></tr>
                             })}
                         </tbody>
                     </table>

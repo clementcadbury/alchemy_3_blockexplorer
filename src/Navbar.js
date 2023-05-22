@@ -14,21 +14,21 @@ function Navbar({ alchemy }) {
         //console.log(e.target[0].value);
         const searchStr = e.target[0].value;
         if ( isValidAddress(searchStr) ){
-            navigate('/address/' + searchStr);
+            navigate(process.env.PUBLIC_URL + '/address/' + searchStr);
             e.target[0].value = '';
             setFormError('');
         } else if ( isHash(searchStr) ) {
             if ( await alchemy.core.getBlock(searchStr) ){
-                navigate('/block/' + searchStr);
+                navigate(process.env.PUBLIC_URL + '/block/' + searchStr);
                 e.target[0].value = '';
                 setFormError('');
             } else if ( await alchemy.core.getTransaction(searchStr) ){
-                navigate('/transaction/' + searchStr);
+                navigate(process.env.PUBLIC_URL + '/transaction/' + searchStr);
                 e.target[0].value = '';
                 setFormError('');
             }
         } else if ( filterInt(searchStr) ) {
-            navigate('/block/' + searchStr);
+            navigate(process.env.PUBLIC_URL + '/block/' + searchStr);
             e.target[0].value = '';
             setFormError('');
         } else {
@@ -41,16 +41,16 @@ function Navbar({ alchemy }) {
             <div className="container-fluid">
                 <ul className='navbar-nav'>
                     <li className='nav-item'>
-                        <Link to="/" className="nav-link">Home</Link>
+                        <Link to={`${process.env.PUBLIC_URL}/`} className="nav-link">Home</Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to="/block" className="nav-link">Block</Link>
+                        <Link to={`${process.env.PUBLIC_URL}/block`} className="nav-link">Block</Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to="/transaction" className="nav-link">Transaction</Link>
+                        <Link to={`${process.env.PUBLIC_URL}/transaction`} className="nav-link">Transaction</Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to="/address" className="nav-link">Address</Link>
+                        <Link to={`${process.env.PUBLIC_URL}/address`} className="nav-link">Address</Link>
                     </li>
                 </ul>
                 <div className="d-flex" role="search">
