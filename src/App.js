@@ -10,6 +10,7 @@ import Home from './Home';
 import Block from './Block';
 import Transaction from './Transaction';
 import ErrorPage from "./error-page";
+import Address from './Address';
 
 import './App.css';
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<Home alchemy={alchemy} />} />
             <Route path="block/:blockId?" element={<Block alchemy={alchemy}/>} />
             <Route path="transaction/:transactionHash?" element={<Transaction alchemy={alchemy}/>} />
+            <Route path="address/:address?" element={<Address alchemy={alchemy}/>} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>

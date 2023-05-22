@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 function Transaction({ alchemy }) {
     const [transactionData, setTransactionData] = useState({});
@@ -31,23 +32,37 @@ function Transaction({ alchemy }) {
 
             setTransactionData(properties);
 
-            console.log(Object.entries(properties).map((entry) => {
+            /*console.log(Object.entries(properties).map((entry) => {
                 return <tr key={entry[0]}><td>{entry[0]}</td><td>{entry[1]}</td></tr>
-            }));
+            }));*/
         }
-        if ( params.transactionHash ) {
+        if (params.transactionHash) {
             fetchData();
         }
     }, [alchemy, params.transactionHash]);
 
+    const makeTransactionsTable = (_transactionData) => {
+        return (
+            <div className="my-3" style={{ textAlign: 'left' }}>
+                {Object.entries(_transactionData).map((entry) => {
+                    let text = "";
+                    if ( entry[0] === 'blockNumber' || entry[0] === 'blockHash' ){
+                        text = <Link to={`/block/${entry[1]}`} >{entry[1]}</Link>;
+                    } else if ( entry[0] === 'from' || entry[0] === 'to' ){
+                        text = <Link to={`/address/${entry[1]}`} >{entry[1]}</Link>;
+                    } else {
+                        text = entry[1];
+                    }
+                    return <div className='row py-2 border-bottom'><div className='col-3'>{entry[0]}</div><div className='col-9' style={{ wordWrap: 'break-word' }}>{text}</div></div>
+                })}
+            </div>
+        );
+    }
+
     return (
         <div className="container">
             <h2>Transaction {params.transactionHash}</h2>
-            <div className="my-3" style={{ textAlign: 'left' }}>
-                {Object.entries(transactionData).map((entry) => {
-                    return <div className='row py-2 border-bottom'><div className='col-3'>{entry[0]}</div><div className='col-9' style={{ wordWrap: 'break-word' }}>{entry[1]}</div></div>
-                })}
-            </div>
+            {makeTransactionsTable(transactionData)}
         </div>
     );
 }

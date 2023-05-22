@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function Navbar({ alchemy }) {
     const [myOptions, setMyOptions] = useState([]);
@@ -23,6 +23,9 @@ function Navbar({ alchemy }) {
                     </li>
                     <li className='nav-item'>
                         <Link to="/transaction" className="nav-link">Transaction</Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to="/address" className="nav-link">Address</Link>
                     </li>
                 </ul>
                 <div className="d-flex" role="search">
