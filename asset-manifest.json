@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/alchemy_blockexplorer/static/css/main.82ec3463.css",
-    "main.js": "/alchemy_blockexplorer/static/js/main.08ce3d6e.js",
+    "main.js": "/alchemy_blockexplorer/static/js/main.02bde0c6.js",
     "static/js/774.815a45e2.chunk.js": "/alchemy_blockexplorer/static/js/774.815a45e2.chunk.js",
     "static/js/779.a1d2e102.chunk.js": "/alchemy_blockexplorer/static/js/779.a1d2e102.chunk.js",
     "index.html": "/alchemy_blockexplorer/index.html"
   },
   "entrypoints": [
     "static/css/main.82ec3463.css",
-    "static/js/main.08ce3d6e.js"
+    "static/js/main.02bde0c6.js"
   ]
 }
