@@ -2,7 +2,7 @@
   "name": "blockexplorer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://clementcadbury.github.io/alchemy_blockexplorer",
+  "homepage": "https://clementcadbury.github.io/alchemy_3_blockexplorer",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -21,11 +21,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "BUILD_PATH='./docs' GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "set BUILD_PATH=./docss&& set GENERATE_SOURCEMAP=false&& react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d docss",
+    "npkill": "npx npkill"
   },
   "eslintConfig": {
     "extends": [
